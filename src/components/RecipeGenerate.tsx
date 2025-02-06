@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import  '../Styles/RecipeGenerate.css';
 
 import {getRecipe} from '../scripts/geminiAI';
-import {transformIngredient, getIngredientId, API_KEY} from '../scripts/spoonacular'
+import {getNutrition} from '../scripts/spoonacular'
 import Recipe from "./Recipe";
 
 
@@ -20,10 +20,9 @@ export default function RecipeGenerate() {
 
     try {
         const response = await getRecipe(listUserIngredients);
-        let newingredients = transformIngredient(response.ingredients)
-        let ingredientsID = newingredients.map(ingredient => getIngredientId(ingredient));
+        let nutrition = await getNutrition(response.ingredients);
+
         
-        console.log(ingredientsID);
         setGeminiAI(response);
         
     } catch (error) {
