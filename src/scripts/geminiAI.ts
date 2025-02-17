@@ -61,12 +61,12 @@ export async function translate(ingredient : string){
   let prompt = ` 
     Traduza do português brasileiro para o inglês o seguinte ingrediente culinário: ${ingredient};
 
-    Sua resposta deve apresentar apenas um resultado, no formato : "response"
+    Sua resposta deve apresentar apenas um resultado, um JSON neste modelo: {"response": "translated ingredient"}
   `;
 
   const result = await model.generateContent(prompt)
-
-  return result;
+  const cleanText = clearJson(result.response.text())
+  return cleanText.response; 
 }
 
 

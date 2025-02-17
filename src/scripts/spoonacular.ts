@@ -24,7 +24,7 @@ export function transformIngredient(ingredients: {name : string, unit : string, 
 
 export async function getIngredientId(ingredient: Ingredient) {
 
-    let ingridentInEnglish = translate(ingredient.name);
+    let ingridentInEnglish = await translate(ingredient.name);  
     
     const url = `https://api.spoonacular.com/food/ingredients/search?query=${ingridentInEnglish}&number=1&apiKey=${API_KEY}`;
   
@@ -33,12 +33,11 @@ export async function getIngredientId(ingredient: Ingredient) {
       if (!response.ok) throw new Error(`Erro: ${response.status}`);
       
       const data = await response.json();
-      console.log(data.results)
       if (data.results.length > 0) {
         ingredient.id = data.results[0].id;
         console.log(`ID de ${ingredient.name} : ${ingredient.id}`)
       } else {
-        console.log("Nenhum ingrediente encontrado.");
+        console.log(`Nenhum correspondente a ${ingredient.name}.`);
       }
     } catch (error) {
       console.error("Erro:", error);

@@ -21,16 +21,12 @@ export default function RecipeGenerate() {
     try {
         const response = await getRecipe(listUserIngredients);
         let newingredients = transformIngredient(response.ingredients)
-        let ingredientsID = newingredients.map(ingredient => getIngredientId(ingredient));
+        let ingredientsID = newingredients.map(async (ingredient) =>  await getIngredientId(ingredient));
         
-        console.log(ingredientsID);
         setGeminiAI(response);
         
     } catch (error) {
         console.error("Erro ao gerar a receita:", error);
-        <>
-        deu errado
-        </>
     }
   };
 
