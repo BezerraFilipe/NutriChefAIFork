@@ -2,8 +2,8 @@ import React, { useState } from "react";
 
 import  '../Styles/RecipeGenerate.css';
 
-import {getRecipe} from '../scripts/geminiAI';
-import {getNutrition} from '../scripts/spoonacular'
+import {getRecipe} from '../controllers/geminiAI/getRecipe';
+import {getNutrition} from '../controllers/spoonacular/getNutritients'
 import Recipe from "./Recipe";
 
 
@@ -21,15 +21,13 @@ export default function RecipeGenerate() {
     try {
         const response = await getRecipe(listUserIngredients);
         let nutrition = await getNutrition(response.ingredients);
+        console.log(nutrition)
 
         
         setGeminiAI(response);
         
     } catch (error) {
         console.error("Erro ao gerar a receita:", error);
-        <>
-        deu errado
-        </>
     }
   };
 

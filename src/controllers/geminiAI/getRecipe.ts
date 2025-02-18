@@ -1,10 +1,9 @@
-import {clearJson} from "./convertJson"
-
+import {clearJson} from "../convertJson"
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 
   // Configura a API do Google Generative AI
   const genAI = new GoogleGenerativeAI("AIzaSyACvNTNOeOaoZJQbvD13vKSP3re2UjKCK4");
-  const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+export const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
 export async function getRecipe(ingredients : string[]) { //recebe uma lista de ingredientes
 
@@ -57,18 +56,7 @@ export async function getRecipe(ingredients : string[]) { //recebe uma lista de 
     return cleanText; 
 }
 
-export async function translate(ingredient : string){
-  let prompt = ` 
-    Traduza do português brasileiro para o inglês o seguinte ingrediente culinário: ${ingredient};
 
-    Sua resposta deve apresentar apenas um resultado, num formato JSON: {"translated": "response_string"}
-  `;
-
-  const result = await model.generateContent(prompt)
-  const cleanText = clearJson(result.response.text())
-
-  return cleanText;
-}
 
 
 
