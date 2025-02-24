@@ -25,7 +25,8 @@ Instalações necessárias:
 
 ## 📄 Documentação
 
-[Notion](https://www.notion.so/1590783275138090b2d2f478101145fa?v=1590783275138017a4a0000c3647d569&pvs=4)
+- [Notion](https://www.notion.so/1590783275138090b2d2f478101145fa?v=1590783275138017a4a0000c3647d569&pvs=4)
+- [Testes](https://docs.google.com/spreadsheets/d/1Co-iR-LIZq3Fb5Oy5G3Q3eMxrkGUHZewUSCtDUKMNWE/edit?usp=sharing)
 
 ## 🚀 Getting Started
 
