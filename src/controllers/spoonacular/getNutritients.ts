@@ -23,10 +23,10 @@ export async function getNutrition(ingredients: {name : string, unit : string, a
     
           if (!response.ok) {
             if (response.status === 404) {
-              ingredient.cal = -1;
-              ingredient.carb = -1;
-              ingredient.fat = -1;
-              ingredient.ptn = -1;
+              ingredient.cal = 0;
+              ingredient.carb = 0;
+              ingredient.fat = 0;
+              ingredient.ptn = 0;
               return ingredient;
             } 
             throw new Error(`Erro na requisição: ${response.status}`);

@@ -5,10 +5,12 @@ import  '../Styles/RecipeGenerate.css';
 import {getRecipe} from '../controllers/geminiAI/getRecipe';
 import {getNutrition} from '../controllers/spoonacular/getNutritients'
 import Recipe from "./Recipe";
+import NutritionTable from "./nutritionTable";
 
 
 export default function RecipeGenerate() {
   const [geminiAI, setGeminiAI] = useState <any | null>(null);
+  const [nutritionData, setNutritionData] = useState<any[]>([]);
   const [userIngredientes, setUserIngredientes] = useState(""); // Para capturar o valor do input
 
   
@@ -21,16 +23,17 @@ export default function RecipeGenerate() {
     try {
         const response = await getRecipe(listUserIngredients);
         let nutrition = await getNutrition(response.ingredients);
-        console.log(nutrition)
+          console.log(nutrition)
 
         
         setGeminiAI(response);
-        
+        setNutritionData(nutrition);
+
     } catch (error) {
         console.error("Erro ao gerar a receita:", error);
     }
   };
-
+  
   return (
     <div className="generateRecipe">
       <div className="inputGenerate">
@@ -57,7 +60,10 @@ export default function RecipeGenerate() {
             <div className="text-content">
            
               <Recipe  ingredients={geminiAI.ingredients} preparation={geminiAI.preparation} harmonizations={geminiAI.harmonizations}/>
+              <NutritionTable nutritionData={nutritionData} />
             </div>
+            
+
                     
           </div>                  
         </div>

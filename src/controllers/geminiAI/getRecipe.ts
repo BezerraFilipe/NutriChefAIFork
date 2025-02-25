@@ -9,7 +9,7 @@ export async function getRecipe(ingredients : string[]) { //recebe uma lista de 
 
     // Define o prompt com base nos ingredientes
    
-   let prompt = `Crie uma receita culinária usando os seguintes ingredientes:`;
+   let prompt = `Crie uma receita culinária para uma pessoa usando os seguintes ingredientes:`;
     for (let i = 0; i < ingredients.length; i++) {
       prompt += ` ${ingredients[i]}`
     }
