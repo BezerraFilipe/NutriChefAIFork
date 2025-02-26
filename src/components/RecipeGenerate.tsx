@@ -2,15 +2,16 @@ import React, { useState } from "react";
 
 import  '../Styles/RecipeGenerate.css';
 
-import {getRecipe, getRecipeNutricion} from '../scripts/geminiAI';
+import {getRecipe} from '../controllers/geminiAI/getRecipe';
+import {getNutrition} from '../controllers/spoonacular/getNutritients'
 import Recipe from "./Recipe";
 import NutritionTable from "./nutritionTable";
 
 
 export default function RecipeGenerate() {
   const [geminiAI, setGeminiAI] = useState <any | null>(null);
+  const [nutritionData, setNutritionData] = useState<any[]>([]);
   const [userIngredientes, setUserIngredientes] = useState(""); // Para capturar o valor do input
-  const [nutrition, setNutrition] = useState <any | null>(null);
   
   
   // Função chamada ao clicar no botão
@@ -20,19 +21,18 @@ export default function RecipeGenerate() {
 
     try {
         const response = await getRecipe(listUserIngredients);
-        const nutrition = await getRecipeNutricion(response.ingredients);
-        setNutrition(nutrition);
-        console.log("teste: ", nutrition)
-        console.log("zxcz: ", nutrition.total)
+        let nutrition = await getNutrition(response.ingredients);
+          console.log(nutrition)
+
         
         setGeminiAI(response);
-        
+        setNutritionData(nutrition);
+
     } catch (error) {
         console.error("Erro ao gerar a receita:", error);
-        
     }
   };
-
+  
   return (
     <div className="generateRecipe">
       <div className="inputGenerate">
@@ -59,16 +59,11 @@ export default function RecipeGenerate() {
             <div className="text-content">
            
               <Recipe  ingredients={geminiAI.ingredients} preparation={geminiAI.preparation} harmonizations={geminiAI.harmonizations}/>
-
+              <NutritionTable nutritionData={nutritionData} />
             </div>
-            <NutritionTable 
-                          totalCalories={nutrition.total.totalCalories} 
-                          totalCarb={nutrition.total.totalCarb} 
-                          totalFat={nutrition.total.totalFat} 
-                          totalProtein={nutrition.total.totalProtein} 
-                        />
-          </div>        
-                    
+            
+
+            </div>        
         </div>
                 ) : null}
     </div>
