@@ -1,71 +1,71 @@
 import React, { useState } from "react";
-
-import  '../Styles/RecipeGenerate.css';
-
-import {getRecipe} from '../controllers/geminiAI/getRecipe';
-import {getNutrition} from '../controllers/spoonacular/getNutritients'
+import '../Styles/RecipeGenerate.css';
+import { getRecipe } from '../controllers/geminiAI/getRecipe';
+import { getNutrition } from '../controllers/spoonacular/getNutritients';
 import Recipe from "./Recipe";
 import NutritionTable from "./nutritionTable";
-
+import { getRecipeImage } from "@/controllers/serpAPI/getImage";
 
 export default function RecipeGenerate() {
-  const [geminiAI, setGeminiAI] = useState <any | null>(null);
+  const [geminiAI, setGeminiAI] = useState<any | null>(null);
   const [nutritionData, setNutritionData] = useState<any[]>([]);
-  const [userIngredientes, setUserIngredientes] = useState(""); // Para capturar o valor do input
-  
-  
-  // Função chamada ao clicar no botão
+  const [userIngredientes, setUserIngredientes] = useState("");
+  const [possibleImages, setImagesList] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+
   const handleGenerate = async () => {
-    const listUserIngredients = userIngredientes.split(';')
+    setLoading(true);
+    const listUserIngredients = userIngredientes.split(';');
     
-
     try {
-        const response = await getRecipe(listUserIngredients);
-        let nutrition = await getNutrition(response.ingredients);
-          console.log(nutrition)
-
-        
-        setGeminiAI(response);
-        setNutritionData(nutrition);
-
+      const response = await getRecipe(listUserIngredients);
+      const nutrition = await getNutrition(response.ingredients);
+      const images = await getRecipeImage(response.title);
+      
+      setGeminiAI(response);
+      setNutritionData(nutrition);
+      setImagesList(images);
     } catch (error) {
-        console.error("Erro ao gerar a receita:", error);
+      console.error("Erro ao gerar a receita:", error);
+    } finally {
+      setLoading(false);
     }
   };
   
   return (
     <div className="generateRecipe">
-      <div className="inputGenerate">
-        {/* Campo de input */}
-            <input className="input"
+      {!loading && !geminiAI ? (
+        <div className="inputGenerate">
+          <input 
+            className="input"
             value={userIngredientes}
-            onChange={(e) => setUserIngredientes(e.target.value)} // Atualiza o estado em tempo real
+            onChange={(e) => setUserIngredientes(e.target.value)}
             placeholder="Digite os ingredientes separados por ';'"
             type="text"
-            />
-            {userIngredientes && (<button className="button" onClick={handleGenerate}>Gerar minha receita</button>)}
-            
-      </div>
-      
-      
-      {/* Renderiza receita se geminiAI existir */}
-      {geminiAI ? (
-        <div className="notebook">  
+          />
+          {userIngredientes && <button className="button" onClick={handleGenerate}>Gerar minha receita</button>}
+        </div>
+      ) : loading ? (
+        <h2>LOADING...</h2>
+      ) : (
+        <div className="notebook">
           <div className="recipeContent">
             <div className="recipe-top">
               <h1>{geminiAI.title}</h1>
-              <div className="img-content">IMAGEM GERADA</div>
+              <div className="img-content">
+                {possibleImages.map((imgURL, index) => (
+                  <img key={index} src={imgURL} alt={`Resultado ${index}`} />
+                ))}
+              </div>
             </div>
             <div className="text-content">
-           
-              <Recipe  ingredients={geminiAI.ingredients} preparation={geminiAI.preparation} harmonizations={geminiAI.harmonizations}/>
+              <Recipe ingredients={geminiAI.ingredients} preparation={geminiAI.preparation} harmonizations={geminiAI.harmonizations} />
               <NutritionTable nutritionData={nutritionData} />
             </div>
-            
-
-            </div>        
+            <button className="button" onClick={() => { setGeminiAI(null); setUserIngredientes(""); setImagesList([]); }}>Gerar outra receita</button>
+          </div>
         </div>
-                ) : null}
+      )}
     </div>
   );
 }
