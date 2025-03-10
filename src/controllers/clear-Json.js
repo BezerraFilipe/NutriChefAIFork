@@ -1,16 +1,15 @@
-export function clearJson(stringJson) {
+export function clearJson(stringJson) { // Refactoring: Renaming method
 
-    let chavesIncompletas = 0;
+    let imcompleteBracket = 0; // Refactoring: Renaming variable
     let cleanText = ``;
     
-
     for (let i = 0; i < stringJson.length; i++) {
-    if (stringJson[i] == '{'){chavesIncompletas += 1}
-    if (chavesIncompletas > 0) {
+    if (stringJson[i] == '{'){imcompleteBracket += 1}
+    if (imcompleteBracket > 0) {
         cleanText += `${stringJson[i]}`
         if (stringJson[i] == `}`) {
-            chavesIncompletas -= 1;
-            if (chavesIncompletas == 0) {
+            imcompleteBracket -= 1;
+            if (imcompleteBracket == 0) {
                 break;    
             }
         }

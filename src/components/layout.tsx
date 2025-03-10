@@ -5,14 +5,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { useState } from "react";
 
-
 type Props = {children: ReactNode;};
 
 export default function Layout({ children }: Props) {
 
   const [input, setInput] = useState("");
   const [history, setHistory] = useState(["Receita 1",]);
-  
   
   return ( 
     <div className="flex h-screen w-full">

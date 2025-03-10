@@ -1,4 +1,4 @@
-import { clearJson } from "../convert-Json";
+import { clearJson } from "../clear-Json";
 import { model } from "./get-recipe";
 
 

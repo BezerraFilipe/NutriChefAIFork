@@ -20,8 +20,7 @@ type Message = { role: string, text: string, geminiAI: any, nutrition: any , ima
 
 export default function RecipeGenerate() {
   const [userIngredientes, setUserIngredientes] = useState(""); // Para capturar o valor do input
-  
-  
+    
   // Função chamada ao clicar no botão
   const handleGenerate = async () => {
 
@@ -54,7 +53,6 @@ export default function RecipeGenerate() {
   const [messages, setMessages] = useState<Message[]>([
     { role: "bot", text: "Olá! 👋 Eu sou o assistente de receitas. Para começar, envie os ingredientes que você tem disponíveis, separados por ponto e vírgula (;), e eu vou ajudar a encontrar uma receita para você! 😊 Exemplo: “farinha; açúcar; ovos; leite” Estou aguardando os seus ingredientes! 🍽️", geminiAI: null, nutrition: null, images: null }
   ]);
-
 
   return (
       <div className="flex flex-col flex-1">

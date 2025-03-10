@@ -1,10 +1,7 @@
 import { Ingredient } from "../../interfaces/Ingredient";
 import { translate } from "../geminiAI/translate";
 
-
-
 const API_KEY = "b42bbd255cbf4135a62e811ad72dc9b0"; // fazer variável de ambiente
-
 
 // Recebe um objeto do tipo Ingredient e adiciona à sua propriedade "id" seu respectivo id na API spoonancular
 export async function getIngredientId(ingredient: Ingredient) {
@@ -21,7 +18,6 @@ export async function getIngredientId(ingredient: Ingredient) {
 
       if (data.results.length > 0) {
         ingredient.id = data.results[0].id;
-      
       }
     } catch (error) {
       console.error("Erro:", error);

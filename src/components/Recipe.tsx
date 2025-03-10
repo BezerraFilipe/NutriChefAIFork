@@ -7,10 +7,6 @@ interface RecipeProps {
 }
 
 export default function Recipe(props: RecipeProps){
-
-    
-   
-
     return (
         <>
              <h2>Ingredientes:</h2>
