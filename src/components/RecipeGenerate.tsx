@@ -17,7 +17,10 @@ import IMGselector from "./Img-selector";
 
 type Message = { role: string, text: string, geminiAI: any, nutrition: any , images: any }
 
-
+const testSlides = [
+  { id: 1, image: "https://via.placeholder.com/800x400" },
+  { id: 2, image: "https://via.placeholder.com/800x400/ff0000" },
+];
 export default function RecipeGenerate() {
   const [userIngredientes, setUserIngredientes] = useState(""); // Para capturar o valor do input
   
@@ -77,7 +80,8 @@ export default function RecipeGenerate() {
                     <div>
                       
                       <h1>{msg.geminiAI.title}</h1>
-                      <IMGselector imagesURLs = {msg.images}/>
+                      
+                      <IMGselector Slides={msg.images || []} />
                       <Recipe  ingredients={msg.geminiAI.ingredients} preparation={msg.geminiAI.preparation} harmonizations={msg.geminiAI.harmonizations}/>
                       
                       <NutritionTable nutritionData={msg.nutrition} />
