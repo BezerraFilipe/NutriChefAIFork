@@ -4,7 +4,7 @@ import { getNutrition } from "../src/controllers/spoonacular/get-nutrients";
 import { clearJson } from "../src/controllers/clear-Json.js";
 import { GoogleGenerativeAI } from "@google/generative-ai"
 
-function transformIngredientTest(input: {name : string, unit : string, amount : number}[]){
+function transformIngredientTest(){
     console.log('Teste de caso, entrada: "[{ name: "Sugar", unit: "g", amount: 100 }]" \nsaída esperada: [ { name: "Sugar", id: "id-0", amount: 100, unit: "g" } ]')
     console.log(transformIngredient([{ name: "Sugar", unit: "g", amount: 100 }]))
 }
