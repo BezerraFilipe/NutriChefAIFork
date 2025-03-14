@@ -15,7 +15,8 @@
 * Node.js - Usado no Back-End
 * Vercel - Usado para hospedar o site
 * GeminAI - API para geração das receitas
-* Spoonacular - API para receber a tabela nutricional
+* Spoonacular - API para gerar a tabela nutricional
+* SerpAPI - API para buscar imagens no google
 
 ### Requisitos
 
@@ -56,11 +57,8 @@ Para usar NutriChefAI, siga estas etapas:
 
 O projeto ainda está em desenvolvimento e as próximas atualizações serão voltadas para as seguintes tarefas:
 
-- [ ] Geração de imagem de inspiração
 - [ ] Compartilhamento de receitas
 - [ ] Pesquisa por ingredientes otimizada
-- [ ] Melhora no design
-
 
 ## 🤝 Colaboradores
 
