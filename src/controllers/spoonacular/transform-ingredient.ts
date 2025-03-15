@@ -11,5 +11,5 @@ export async function transformIngredient(ingredients: {name : string, unit : st
         unit: ingredient.unit,        
     }));
 
-    return newIngredients;// retorna uma lista de objetos da interface Ingredient, agora possuem um ID
+    return newIngredients; // retorna uma lista de objetos da interface Ingredient, agora possuem um ID
 }

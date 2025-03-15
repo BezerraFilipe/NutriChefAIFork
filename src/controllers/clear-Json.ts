@@ -1,4 +1,4 @@
-export function clearJson(stringJson) { // Refactoring: Renaming method
+export function clearJson(stringJson : string) { // Refactoring: Renaming method
 
     let imcompleteBracket = 0; // Refactoring: Renaming variable
     let cleanText = ``;
@@ -23,8 +23,4 @@ export function clearJson(stringJson) { // Refactoring: Renaming method
       console.error("Erro ao analisar o JSON:", error);
     }
 
-
 }
-
-
-

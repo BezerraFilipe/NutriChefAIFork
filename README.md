@@ -13,8 +13,9 @@
 
 * Next.js - Usado no Front-End
 * Node.js - Usado no Back-End
+* jest - Usado para os testes automatizados
 * Vercel - Usado para hospedar o site
-* GeminAI - API para geração das receitas
+* GeminiAI - API para geração das receitas
 * Spoonacular - API para gerar a tabela nutricional
 * SerpAPI - API para buscar imagens no google
 
